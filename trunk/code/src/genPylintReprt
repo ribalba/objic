@@ -1,0 +1,7 @@
+#!/bin/bash
+for i in `grep 'Geerd' *.py | cut -f1 -d":" | sort| uniq`; do
+	echo "Generating report for $i"
+	/usr/bin/pylint --include-ids=y  --comment=y --disable-msg=C0103 $i > $i.txt
+done
+
+grep rated *.txt | sed -e 's/Your code has been rated at/ /g' | sed -e 's/(.*)//g' | sed -e 's/\.txt/ /g' | sed -e 's/$/\\\\/g' | tr ':' '&'  > ../../../../paper/programs/pylinteval

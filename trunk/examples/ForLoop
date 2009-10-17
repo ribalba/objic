@@ -1,0 +1,7 @@
+class ForLoop{
+    a = new Int(3)
+
+    for (c = new Int(); c.value() <= a.value(); c = c.add(1)){
+        print(c.value())
+    }
+}

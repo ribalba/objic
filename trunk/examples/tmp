@@ -1,0 +1,69 @@
+class multi {
+
+	def lol{
+		argv = ARGS.value()
+		
+		argsint = new Int(argv)
+		
+		retval = argsint.mul(argv)
+		
+		retMeth = retval.value()
+		
+		return(retMeth)
+	}
+
+    def main {
+
+		argint = ARGS.value()
+	
+		a = new Int(argint)
+		
+		returnBuffer = new String()
+	
+		for (c = new Int(); c.value() < a.value(); c = c.add(1)){
+			
+			cval = c.value()
+			
+			val = ME.lol(cval)
+			
+			returnBuffer = returnBuffer.add(val)
+			returnBuffer = returnBuffer.add(" ")
+
+
+		}
+		
+		
+		returnBudderMeht = returnBuffer.value()
+	
+		return (returnBudderMeht)
+
+    }
+
+\\	al = new b()
+	 	
+\\ 	a = al.printMe()
+ 	
+ 	
+\\	a = new Int(10) @ bigi.home
+
+\\	x = new String("Hello Tom") @ maci.home
+
+
+\\	print (a.value())
+	
+\\	print (x.value())
+
+
+\\	for (c = new Int(); c.value() <= a.value(); c = c.add(1)){
+\\		x = x.add(", Tom")
+\\	}
+	
+\\	print(x.value())
+
+\\	while (a.value() == a.value()){
+\\  	  a = a.add(1)
+\\                if(a.value() > c.value()){
+\\                      break
+\\                }
+\\        }
+}

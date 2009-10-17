@@ -1,0 +1,23 @@
+class addition{
+       
+	def main{
+	
+		argint = ARGS.value()
+
+        	a = new Int(argint)		
+
+		var = new Int(0)
+	
+		for( i = new Int(); i.value() < a.value(); i = i.add(1)){
+		
+			iMeth = i.value()
+		
+			var = var.add(iMeth)
+		}
+		
+		retValMeth = var.value()
+		
+		return(retValMeth)
+	}
+}
+

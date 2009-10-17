@@ -1,0 +1,41 @@
+This is the install document for the objic language. 
+
+1) First of all you have to check if you have python > 2.4 installed, this can be best done by running :
+
+$ python -V
+
+This has to return something bigger than Python 2.4.0
+
+Then you have to check for the antlr python libraries. 
+
+$ python -c 'import antlr3' 
+
+If either of these command fail you have to install these packages. Most distributions will supply packages consult man apt-get or man yum for more information. Otherwise 
+
+http://www.python.org/ 
+http://www.antlr.org/
+
+will help
+
+2) After checking for the libs you can extract the code and install it
+
+the source code can be found under objic.ribalba.de
+
+after downloading the latest version 
+
+$ tar -xvzf objic.tar.gz
+
+will unzip the file with all you need.
+
+
+3) It is advised to edit the configuration file. This should be relative self explanatory and the default settings are normally OK for testing
+
+4) Then you have to setup your execution path to include the executable files This is done by extending your PATH to include the src folder
+
+$ export PATH=/path/to/source:$PATH
+
+will normally do the trick
+
+ 
+Please email me if you have any further questions under didi@ribalbaNOSPAM.de 
+

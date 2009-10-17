@@ -1,0 +1,107 @@
+digraph {
+
+	ordering=out;
+	ranksep=.4;
+	bgcolor="white"; node [shape=box, fixedsize=false, fontsize=12, fontname="Helvetica-bold", fontcolor="black"
+		width=.25, height=.25, color="black", fillcolor="white", style="filled, solid, bold"];
+	edge [arrowsize=.5, color="black", style="bold"]
+
+  n0 [label="CLASS"];
+  n1 [label="ForLoop"];
+  n2 [label="BLOCK"];
+  n2 [label="BLOCK"];
+  n3 [label="EQ"];
+  n3 [label="EQ"];
+  n4 [label="a"];
+  n5 [label="NEWOBJ"];
+  n6 [label="Int"];
+  n7 [label="PARAMS"];
+  n7 [label="PARAMS"];
+  n8 [label="10"];
+  n9 [label="BLOCK"];
+  n9 [label="BLOCK"];
+  n10 [label="EQ"];
+  n10 [label="EQ"];
+  n11 [label="c"];
+  n12 [label="NEWOBJ"];
+  n13 [label="Int"];
+  n14 [label="PARAMS"];
+  n15 [label="WHILE"];
+  n15 [label="WHILE"];
+  n16 [label="BOOL"];
+  n16 [label="BOOL"];
+  n17 [label="<="];
+  n18 [label="CALL"];
+  n18 [label="CALL"];
+  n19 [label="c"];
+  n20 [label="value"];
+  n21 [label="PARAMS"];
+  n22 [label="CALL"];
+  n22 [label="CALL"];
+  n23 [label="a"];
+  n24 [label="value"];
+  n25 [label="PARAMS"];
+  n26 [label="BLOCK"];
+  n26 [label="BLOCK"];
+  n27 [label="BLOCK"];
+  n27 [label="BLOCK"];
+  n28 [label="PRINTSTM"];
+  n28 [label="PRINTSTM"];
+  n29 [label="CALL"];
+  n29 [label="CALL"];
+  n30 [label="c"];
+  n31 [label="value"];
+  n32 [label="PARAMS"];
+  n33 [label="EQ"];
+  n33 [label="EQ"];
+  n34 [label="c"];
+  n35 [label="CALL"];
+  n35 [label="CALL"];
+  n36 [label="c"];
+  n37 [label="add"];
+  n38 [label="PARAMS"];
+  n38 [label="PARAMS"];
+  n39 [label="1"];
+
+  n0 -> n1 // "CLASS" -> "ForLoop"
+  n0 -> n2 // "CLASS" -> "BLOCK"
+  n2 -> n3 // "BLOCK" -> "EQ"
+  n3 -> n4 // "EQ" -> "a"
+  n3 -> n5 // "EQ" -> "NEWOBJ"
+  n3 -> n6 // "EQ" -> "Int"
+  n3 -> n7 // "EQ" -> "PARAMS"
+  n7 -> n8 // "PARAMS" -> "10"
+  n2 -> n9 // "BLOCK" -> "BLOCK"
+  n9 -> n10 // "BLOCK" -> "EQ"
+  n10 -> n11 // "EQ" -> "c"
+  n10 -> n12 // "EQ" -> "NEWOBJ"
+  n10 -> n13 // "EQ" -> "Int"
+  n10 -> n14 // "EQ" -> "PARAMS"
+  n9 -> n15 // "BLOCK" -> "WHILE"
+  n15 -> n16 // "WHILE" -> "BOOL"
+  n16 -> n17 // "BOOL" -> "<="
+  n16 -> n18 // "BOOL" -> "CALL"
+  n18 -> n19 // "CALL" -> "c"
+  n18 -> n20 // "CALL" -> "value"
+  n18 -> n21 // "CALL" -> "PARAMS"
+  n16 -> n22 // "BOOL" -> "CALL"
+  n22 -> n23 // "CALL" -> "a"
+  n22 -> n24 // "CALL" -> "value"
+  n22 -> n25 // "CALL" -> "PARAMS"
+  n15 -> n26 // "WHILE" -> "BLOCK"
+  n26 -> n27 // "BLOCK" -> "BLOCK"
+  n27 -> n28 // "BLOCK" -> "PRINTSTM"
+  n28 -> n29 // "PRINTSTM" -> "CALL"
+  n29 -> n30 // "CALL" -> "c"
+  n29 -> n31 // "CALL" -> "value"
+  n29 -> n32 // "CALL" -> "PARAMS"
+  n26 -> n33 // "BLOCK" -> "EQ"
+  n33 -> n34 // "EQ" -> "c"
+  n33 -> n35 // "EQ" -> "CALL"
+  n35 -> n36 // "CALL" -> "c"
+  n35 -> n37 // "CALL" -> "add"
+  n35 -> n38 // "CALL" -> "PARAMS"
+  n38 -> n39 // "PARAMS" -> "1"
+
+}
+
