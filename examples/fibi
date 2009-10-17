@@ -1,0 +1,103 @@
+class fibi  {
+
+	print ("NEW FIB OBJ")
+
+    \\The multiplier method
+	def fib{
+		print("NEW FIB CALL ATS is:")
+		print(ARGS.value())
+
+		argv = ARGS.value()
+		
+		argsint = new Int(argv)
+		
+  		one = new Int(1)
+		two = new Int(2)
+
+		print("IFDEBUG")
+		print(argsint.value())
+		print(one.value())
+
+		if(argsint.value() <= one.value()){
+			print("RETURNIN NI IF")
+			metone = argsint.value()
+			return(metone)
+		}
+
+
+		argsminone = argsint.min(1)
+		argsintwo = argsint.min(2) 
+
+		argsminonemeth = argsminone.value()
+		argsintwometh = argsintwo.value()
+		
+		print("MINS")
+		print(argsminonemeth)
+		print(argsintwometh)
+		
+		lol1 = new fibi()
+		lol2 = new fibi()
+			
+		fibminone = lol1.fib(argsminonemeth)
+		
+		fibmintwo = lol2.fib(argsintwometh)
+		
+		fibminonemeth = fibminone.value()
+		fibmintwometh = fibmintwo.value()
+	  	
+		print("FIB RETURN VALS ARE")	
+		print (fibminonemeth)
+		print (fibmintwometh)
+		fibobjone = new Int (fibminonemeth)
+		fibobjtwo = new Int (fibmintwometh)	
+		
+		fibobjtwometh = fibobjtwo.value()
+	
+		retval = fibobjone.add(fibobjtwometh)
+
+		retMeth = retval.value()
+		print("I am returning")
+		print(retMeth)
+		return(retMeth)
+	}
+
+
+    \\The main method
+    def main {
+
+		argint = ARGS.value()
+	
+		a = new Int(argint)
+		
+		returnBuffer = new String()
+	
+	\\	for (c = new Int(); c.value() < a.value(); c = c.add(1)){
+			
+	\\		print("NEW LOOP")
+	\\		print(c.value())
+	
+	\\
+			c = new Int(3)
+
+			cval = c.value()
+			
+			lola = new fibi()	
+			retvalAHHH = lola.fib(cval)
+
+			print("FIB RTVAL")
+			print (retvalAHHH.value())
+			valretintmeth = retvalAHHH.value()
+	
+			returnBuffer = returnBuffer.add(valretintmeth)
+
+			returnBuffer = returnBuffer.add(" ")
+
+
+	\\	}
+		
+		returnBudderMeht = returnBuffer.value()
+	
+		return (returnBudderMeht)
+
+    }
+}

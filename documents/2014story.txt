@@ -1,0 +1,199 @@
+.. $Id: 2014story.txt 166 2009-05-14 20:25:02Z didi $
+
+
+===============================
+ Programming the Cloud 
+===============================
+
+:Author: Hoffmann Geerd-Dietger
+:Contact: didi@ribalba.de
+:Date: $Date: 2009-05-14 21:25:02 +0100 (Thu, 14 May 2009) $
+:Web site: http://www.ribalba.de
+:Version: 0.2
+
+Dave is sitting at home in front of his TV and is trying to remember
+all the people who he should send a Christmas card to. Being annoyed
+by the fact that he has this problem every year, and always forgets
+someone, he decides to write a little application he can use through
+the year to record these people. Thinking about the problem
+he identifies two scenarios. The first one is that he has
+to add people from his address book and the second is that he has to
+manually enter the data. So he grabs the keyboard that is next to
+the couch, changes the TV over to his Desktop and creates a new
+application. First he defines a class he calls Model, that defines the
+data the program should hold. Experienced readers can tell that Dave
+knows the concept of Model-View-Controller. ::
+
+    people = new List<Person>
+
+On a very high level the only thing that he needs is a list of people
+with their names and addresses. So he searches for a "person" Object
+hosting service that suits his needs [1]_ and finds one offered by
+Bluesphere.org. This service can be used by private users for free, so he
+defines that all Person objects should be hosted on Bluesphere.org. 
+The guys [2]_ at Bluesphere are so nice and also offer a backup server
+so that if the first one is not reachable objects can still be
+instantiated and used::
+    
+    Person @ bluesphere.org, backup.bluesphere.org
+
+If this would be an important application he
+would also specify that all objects are mirrored, to be extra
+safe. This would involve specifying where and the language would take care of
+all the underlying work. Because his desktop machine is quite low spec he decides to host
+the list object on one of his rented object servers::
+       
+    List @ Flipcube.net
+
+He has a contract with Flipcube so that he can create 1 Million list
+objects a day with less than 10000 entries. If he goes over this limit
+they will charge him according to the methods he invokes, so creating
+a new list will cost one credit but a complex ordering will cost
+5. But this will easily fit into his limit, so now he has to set up the
+data structure he needs. As he wants to use the application throughout 
+the year he has to save the data. He does this by defining a save()
+and retrieve() method in his model, which he can pretty much copy and
+paste::
+   
+   myDataStore = new ObjectStore("peopleToRememberToSendCardsTo")
+
+   def save(){
+       myDataStore.save(people)
+   }
+
+   def retrieve(){
+       for person in myDataStore.getItems(){
+           people.add(person)
+       }
+   }
+
+
+He has rented out a 2 TB of store with the company InodeBird so the tells the
+program to initialize all ObjectStore objects there::
+
+   ObjectStore @ InodeBird.com, dave.homeserver.net
+
+Further he has set up a private backup server at dave.homeserver.net
+which is a mirror of InodeBird. Dave has done this so he still has
+physical access to his data; all his friends call him paranoid and old
+fashioned because of this. Their opinion is that he can never reach
+the 99.9% availability of the InodeBird server farm that is located in
+an old nuclear bunker. All the data transmission is encrypted and signed, when
+signing up to the services it is required to transmit your personal ''profile''
+file which includes keys and other relevant data.
+
+Now Dave is satisfied that the model can handle all the data it needs
+to. So he starts programming the actual functionality in a class named
+Controller. The first thing the controller must do is retrieve the
+saved data so he defines the constructor. ::
+
+    def Controller(stdinParam, stdoutParam){
+        stdin = stdinParam
+        stdout = stdoutParam
+        Model.retrieve()
+    }
+
+First he adds the method to add a person from his address book. The
+variable stdin and stdout are defined by the object View and are
+passed in every time a Controller is created. But he does not really
+care how he is going to access the application, as there are predefined
+views for his phone, TV and computer. ::
+
+   def addFromAddressBook(){
+       var myAddressBook = new AddressBook() @ addressbookserv.net
+
+       #ToDo check if successful
+       myAddressBook.login(stdin, stdout)
+
+       stdout.print("Enter Name ... : ")
+       personToFind = stdin.read()
+       
+       personToAdd = myAddressBook.find(personToFind)
+       
+       Model.people.add(persontoAdd)
+
+       Model.save()
+   }
+
+
+The method to add a person by hand is written quite easily too. ::
+
+    def addByHand(){
+        personToAdd = new Person()
+        personToAdd.propagate(stdin, stdout)
+        Model.people.add(personToAdd)
+        Model.save()
+    }
+ 
+
+Remember we use the Person object hosted on bluesphere.org and this has
+a propagate method that will ask all the data it needs to know through
+stdin and stdout. Finally Dave saves the updated list of persons. He
+then adds a similar method for deleting people from the list.
+
+He could make the program more compact and write the addByHand()
+method in a short form. ::
+
+   def addByHand(){
+        Model.people.add(new Person().propagate(stdin, stdout))
+    }
+
+But Dave likes the idea to have nice structured and readable
+code. Further to write in this way he would have to update the model
+specification to auto-save when the data is modified.
+
+What is not directly visible from the code is that the list is
+actually only a list of pointers. So if he updates an address in his
+address book the list will have the up-to-date data. Thread safety is an issue
+here but Dave can assume that the programmer of the interface has taken care
+of this. Instead of going through the process of a login in to the AddressBook server he could have
+added a certificate to the program, so as soon as it runs he has read
+rights. He is also relying on that bluesphere will keep the objects
+accessible for as long as he needs them. In the long run he will pay
+them for hosting the objects, but for the development stage this risk
+is acceptable.
+
+Now the only thing he has to do is to create some front-end to his
+service. For this he can use some objects that are predefined so he
+can access his application through all the devices he has like phone,
+computer, netbook, TV, etc. So he defines a class View that extends
+from viewport.org and he registers the methods he has created in the
+controller. He doesn't need to care about the display of the Person
+objects as there is a method display(stdout) that will know how to
+display the object correctly depending on what type stdout is. Stdout
+always has a type field that tells the render function what to
+output. For example if Dave accesses his application through a web
+browser the type will be XHTML but he can easily get an XML feed by
+using a stdout object with the type XML.
+
+As all the objects are hosted on servers distributed around the world
+Dave never really know or needs to know where the data is. While
+adding the List object, to his application, Dave chuckled. He was
+reminded of how the sort function had a really funny error that when
+100 references where the same the ordering would not be correct. This
+was a really weird error and only a few people noticed it, but because
+all the computation was done by the servers the fix was instant and
+some people still didn't know about this. He also remembered how it
+used to be, when you had to download updated versions of every
+software application all the time and what a pain that was.
+
+Dave uploaded his application to his application hosting service and
+can now use it from wherever he is in the world. After some time,
+Dave's friends found out about his application and wanted to use it
+too. The only thing he had to do is add some user verification and he
+also decided to add some error catching and then allowed his friends
+to use the app. Because every part of the system is hosted somewhere
+it doesn't matter that now 20 people us it, as the servers he uses are
+all part of a scalable system. Dave is thinking about selling access
+to his application now, this is also quite easy; the only thing he has
+to do is include a payment object from the company payfriend.com, that
+he already uses to pay for his storage and then he can start making
+money.
+
+
+
+.. [1] He is not bound to **one** service, he can use anyone he thinks will host the objects to his satisfaction.
+
+
+.. [2] Of course there are girls working at Bluesphere too.
+

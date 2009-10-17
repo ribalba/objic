@@ -1,0 +1,16 @@
+class helloUserClass{
+      
+      def main{
+            val = new helloPrint()
+
+            \\print ("HELLO1")
+            \\print (val.printMe())            
+            \\print ("HELLL2")
+            valMeth = val.printMe()
+            
+            print(valMeth)
+
+            return(valMeth)
+      }
+
+}

@@ -1,0 +1,13 @@
+class helloPrint{
+
+	def printMe{
+	        val = new String("helloPrint:Hello World")
+
+        	valMeth = val.value()
+                \\print("Helloprint")
+                \\print(valMeth)
+           	return(valMeth)
+
+
+	}
+}

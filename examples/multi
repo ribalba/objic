@@ -1,0 +1,44 @@
+class multi {
+
+    \\The multiplier method
+	def mulitply{
+		argv = ARGS.value()
+		
+		argsint = new Int(argv)
+		
+		retval = argsint.mul(argv)
+		
+		retMeth = retval.value()
+		
+		return(retMeth)
+	}
+
+
+    \\The main method
+    def main {
+
+		argint = ARGS.value()
+	
+		a = new Int(argint)
+		
+		returnBuffer = new String()
+	
+		for (c = new Int(); c.value() < a.value(); c = c.add(1)){
+			
+			cval = c.value()
+			
+			val = ME.mulitply(cval)
+			
+			returnBuffer = returnBuffer.add(val)
+
+			returnBuffer = returnBuffer.add(" ")
+
+
+		}
+		
+		returnBudderMeht = returnBuffer.value()
+	
+		return (returnBudderMeht)
+
+    }
+}

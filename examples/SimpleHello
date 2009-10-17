@@ -1,0 +1,3 @@
+class SimpleHello{
+    print("Hello World")
+}

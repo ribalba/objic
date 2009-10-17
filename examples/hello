@@ -1,0 +1,13 @@
+class hello{
+      
+      def main{
+            print("Hello World")
+      
+            val = new String("Hello World")
+
+            valMeth = val.value()
+
+            return(valMeth)
+      }
+
+}
